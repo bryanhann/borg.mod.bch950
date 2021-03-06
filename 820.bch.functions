@@ -1,0 +1,13 @@
+#!/bin/bash
+#This shebang is for synax only. Do not make executable!
+
+hide () {
+    local hole=./.hide
+    mkdir -p ${hole}
+    mv $* ${hole}
+}
+
+unhide () {
+    local hole=./.hide
+    mv ${hole}/$* .
+}

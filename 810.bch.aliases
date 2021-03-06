@@ -1,0 +1,7 @@
+#!/bin/bash
+#This shebang is for synax only. Do not make executable!
+
+alias ls='ls -GF'
+alias l='ls -lGF'
+alias lbin='pushd ~/.local/bin'
+
