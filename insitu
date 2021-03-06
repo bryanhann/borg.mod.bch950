@@ -1,0 +1,4 @@
+for script in $(/bin/ls [0-9]* | sort); do
+    echo . $PWD/$script
+         . $PWD/$script
+done
