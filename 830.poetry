@@ -3,3 +3,10 @@
     export POETRY_URL=https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py
     curl -sSL ${POETRY_URL} | python - --no-modify-path
 }
+
+mypoetry () {
+    [ -z ${POETRY_HOME} ] && echo [$POETRY_HOME] is not defined
+    [ -z ${POETRY_HOME} ] && return
+    echo }} ${POETRY_HOME}/bin/poetry $*
+            ${POETRY_HOME}/bin/poetry $*
+}
