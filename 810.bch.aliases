@@ -4,4 +4,4 @@
 alias ls='ls -GF'
 alias l='ls -lGF'
 alias lbin='pushd ~/.local/bin'
-
+alias envl='set | grep ' # environ list
