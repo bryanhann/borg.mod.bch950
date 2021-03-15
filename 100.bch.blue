@@ -1,0 +1,6 @@
+first () {
+    for path in $1; do
+         [ -d $path ] && echo $path && return
+    done
+}
+export BCH_BLUE=$(first /media/pi/SeagateBlue /Volumes/SeagateBlue) 
