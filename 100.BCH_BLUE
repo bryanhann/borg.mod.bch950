@@ -1,0 +1,16 @@
+#
+#  Set BCH_BLUE to the root of the attached SeagateBlue drive if it is attached, else Null..
+#
+
+candidates=()
+candidates+=( /media/${USER}/SeagateBlue  )
+candidates+=( /Volumes/SeagateBlue   )
+
+unset BCH_BLUE
+
+for path in ${candidates[@]}; do
+    echo $path
+    [ -d ${path} ] && export BCH_BLUE=${path} && break
+done
+
+
