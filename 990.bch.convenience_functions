@@ -11,3 +11,14 @@ unhide () {
     local hole=./.hide
     mv ${hole}/$* .
 }
+
+
+bch_clone () {
+    name=$1
+    shift
+    echo }} git clone https://github.com/bryanhann/$name $*
+            git clone https://github.com/bryanhann/$name $*
+}
+
+
+

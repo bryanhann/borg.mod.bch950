@@ -1,0 +1,22 @@
+#!/bin/bash
+#This shebang is for synax only. Do not make executable!
+
+bch__user_yn () {
+    while [ . = . ]; do
+        printf "$1 [Y/N] "
+        read answer
+        [ "${answer}" = "Y" ] && return 0
+        [ "${answer}" = "y" ] && return 0
+        [ "${answer}" = "N" ] && return 1
+        [ "${answer}" = "n" ] && return 1
+        echo "expected one of: 'Y', 'y', 'N', 'n'"
+    done
+}
+
+bch__user_rmdir () {
+    [ ! -d ${1} ] && return
+    echo about to remove [${1}]
+    bch__user_yn "Proceed?" || { echo skipping; return; }
+    rm -rf ${1}
+    return 0
+}
