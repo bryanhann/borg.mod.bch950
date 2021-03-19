@@ -1,5 +1,5 @@
 #!/bin/bash
 #This shebang is for synax only. Do not make executable!
 
-[ -d ${BORG_MYBIN}/monty ] || git clone https://github.com/magicmonty/bash-git-prompt ${BORG_MYBIN}/monty
-source ${BORG_MYBIN}/monty/gitprompt.sh
+[ -d ${MYBORG_BIN}/monty ] || git clone https://github.com/magicmonty/bash-git-prompt ${BORG_MYBIN}/monty
+source ${MYBORG_BIN}/monty/gitprompt.sh
