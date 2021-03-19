@@ -1,13 +1,12 @@
 #!/usr/bin/env sh
 #Do not make executable. Source only!
 
-bch_poetry_installer () {
-    #borg-hasoption -h     $* && bch_poetry_installer_usage && return
+bch__poetry_install () {
     local T=
     local O=
     [ $1. = -i. ] && T=$2
     [ $1. = -r. ] && T=$2
-    [ $T. = .   ] && bch_poetry_installer_usage
+    [ $T. = .   ] && bch__poetry_install_usage
     [ $T. = .   ] && return 2
     [ -d $T     ] && [ $1 = -r ] && bch__user_yn "Reinstall?" && bch__user_rmdir $T
     [ -d $T     ] && echo "Already something at [$T]"
@@ -19,10 +18,10 @@ bch_poetry_installer () {
   }
 
 
-bch_poetry_installer_usage () {
+bch__poetry_install_usage () {
     cat <<HEREDOC
 Usage:
-    bch_install_poetry [-i | -r] PATH
+    bch__poetry_install [-i | -r] PATH
 
     Install poetry at PATH.
 
