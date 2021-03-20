@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+
+__export () { 
+  key=$1
+  shift
+  export ${key}="$*"
+}
+
+__deref () {
+    echo $(eval "echo \$$1");
+}
+
+__deref_set () {
+    v=$(__deref $1)
+    [ ! "$v" = "" ] && echo $v && return 0
+    __warn $1 is not set
+    return 1
+}
+
+__warn () { 
+    echo WARNING: $* >&2
+}
+
+

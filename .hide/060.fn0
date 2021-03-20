@@ -1,0 +1,119 @@
+#!/usr/bin/env bash
+
+fn0_log () {
+    echo "[${__fn0__}]:" $*
+}
+__stat () {
+      [ "$1" == "" ] && echo unset && return
+      [ ! -d "$1"  ] && echo set && return
+      [   -d "$1"  ] && echo dir && return
+}
+fn0_stat_var () {
+    local short=$1
+    local long=$(fn0_key4name $short)
+    local val=$(__deref ${long})
+    local stat=$(__stat $val)
+    printf "${short} -> [\$${long}] -> [$val] ($stat)\n" 1>&2
+}
+
+fn0_longbox4short () {
+    local key=$(fn0_key4name $1)
+    echo "[\$$(fn0_key4name $1)]"
+}
+
+
+__warn_unset() {
+   __warn $key is not set
+   echo try setting it first.
+}
+
+fn0_key4name () {
+    echo $(borg-upper ${__fn0__})_$1
+}
+
+fn0_var () {
+    #local key=FN0_$(borg-upper ${__fn0__})_$1
+    local key=$(fn0_key4name $1)
+    local opt=$2
+    local new=$3
+    local old=$(__deref ${key})
+    local is_set=no
+    local is_dir=no
+    [ ! "$old" == "" ] && is_set=yes
+    [ ! "$old" == "" ] && [ -d ${old} ] && is_dir=yes
+    case ${opt}. in
+        --show.)
+            echo "[\$${key}] is [$old]."
+            ;;
+        --set.)
+            __export $key $new
+            ;;
+        --get.|.)
+            echo $old
+            ;;
+        --is-set.)
+            [ $is_set = yes ]
+            ;;
+        --is-dir.)
+            [ $is_dir = yes ]
+            ;;
+        --rm-dir.)
+            [ $is_dir = yes ] && echo removing $old && rm -rf $old
+            ;;
+        get!.)
+            [ $is_set = no ] && __warn_unset $key && return 1
+            echo ${old}
+            ;;
+        dir!.)
+            [ $is_set = no ] && __warn $key is unset && return 1
+            [ $is_dir = no ] && __warn $key is not a dir && return 1
+            echo ${old}
+            ;;
+        *)
+            echo "USAGE: fn0_env SUBCOMMAND KEY [VAL]"
+            echo "SUBCOMMANDS: show set get get!"
+            ;;
+    esac
+}
+
+
+fn0_usage () {
+    local pos=$(( ${#__fn0__} + 1 ))
+    echo "USAGE:                        "
+    echo "        ${__fn0__} SUBCOMMAND "
+    echo "                              "
+    echo "SUBCOMMANDS:                  "
+    for xx in $(set|grep ^${__fn0__}_);  do
+       [ ${xx} = "()" ] && continue
+      echo "        ${xx:$pos}"
+      done
+   local more=__${__fn0__}_usage
+   $more
+}
+
+
+fn0_main () {
+    __export __fn0__    $1
+    __export __fn1__    $2
+    __export __fn__     $1_$2
+    case ${2}. in
+        .|-h.|--help.)
+            fn0_usage ${__fn0__}
+            return
+            ;;
+        *)
+            shift ; shift 
+            $__fn__ $*
+            ;;
+    esac
+}
+
+
+fn0_do_action () {
+    export __fn0__=${1}
+    export __fn__=${1}_${2}
+    shift ; shift 
+    echo __handle_main "++[$__fnn__] $*"
+    $__fn__ $*
+}
+

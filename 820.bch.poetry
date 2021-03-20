@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+
+poetry () {
+    export BCH__POETRY_HOME=${MYBORG_BIN}/my/foo/bar/poetryi2
+    local POETRY_HOME=${BCH__POETRY_HOME}/safety
+    local POETRY_EXEC=${POETRY_HOME}/bin/poetry
+    [ .$1 == .--bch-reinstall ] && rm -rf ${POETRY_HOME}
+    [ .$1 == .--bch-reinstall ] && shift
+    [ ! -d ${POETRY_HOME} ] && {
+        echo Poetry in not yet installed. Installing it now.
+        bch__user_yn "PROCEED?" || return 1
+        mkdir -p $(dirname ${POETRY_HOME})
+        export POETRY_URL=https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py
+        curl -sSL ${POETRY_URL} | python - --no-modify-path
+    }
+    ${POETRY_HOME}/bin/poetry $*
+}

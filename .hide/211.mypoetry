@@ -1,0 +1,61 @@
+#!/usr/bin/env bash
+
+mypoetry() {
+    fn0_main mypoetry $*
+}
+
+mypoetry_sethome () {
+    fn0_var HOME --set $1
+}
+
+mypoetry_install () {
+    [ -z $1 ] || mypoetry sethome $1
+    local HOME=$(fn0_var HOME --get)
+    fn0_var HOME --is-set || { fn0_log HOME is not set   ; return; }
+    fn0_var HOME --is-dir && { fn0_log Already installed ; return; }
+    __mypoetry_install $(fn0_var HOME)
+}
+
+mypoetry_invoke () {
+    fn0_var HOME --is-set HOME || echo HOME not set
+    fn0_var HOME --is-set HOME || return
+    fn0_var HOME --is-dir HOME || echo HOME not installed
+    fn0_var HOME --is-dir HOME || return
+    $(fn0_var HOME --get)/bin/poetry $*
+    echo ++invoke 
+}
+
+__mypoetry_install () {
+    local POETRY_HOME=$HOME
+    mkdir -p $(dirname ${POETRY_HOME})
+    export POETRY_URL=https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py
+    curl -sSL ${POETRY_URL} | python - --no-modify-path
+}
+
+__mypoetry_usage () {
+    echo 
+    echo EXAMPLES:
+    __mypoetry_examples
+    echo ENVIRONMENT:
+    echo
+    echo "    " $(fn0_stat_var HOME)
+}
+
+__mypoetry_examples() {
+    local HOME=$(fn0_longbox4short HOME)
+    cat <<EOF_STAT
+
+        $ ${__fn0__} sethome /my/path
+                Sets $HOME to /my/path
+
+        $ ${__fn0__} install
+                Installs poetry to $HOME
+
+        $ ${__fn0__} install /my/path
+                Installs poetry to /my/path
+
+        $ ${__fn0__} invoke
+                Invokes $HOME/bin/poetry
+EOF_STAT
+}
+
