@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+
+NAMED_INDEX=~/.cache/named/index
+
+mkdir -p $(dirname $NAMED_INDEX)
+
+named_index () {
+    #rm ${NAMED_INDEX}
+    find ~ -name .named > ${NAMED_INDEX}
+}
+
+named_name4path () {
+    [ -f $1/name.txt ] && cat $1/name.txt || echo anonymous
+}
+
+named_find () {
+   while read line; do 
+      [ "$1" = "$(named_name4path $line)" ] && echo $line
+    done < ${NAMED_INDEX}
+}
+named_list () {
+    while read line; do
+        name=$(named_name4path $line)
+#        [ -z "$name" ] && name=anonymous
+        printf "$name\t$line\n"
+    done < ${NAMED_INDEX}
+}
