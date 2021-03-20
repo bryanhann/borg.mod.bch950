@@ -7,4 +7,9 @@ alias lbin='pushd ~/.local/bin'
 alias envl='set | grep ' # environ list
 alias cfg='cd ~/.config/myborg/modules/0.bch'
 alias prj='cd ~/_prj'
-
+alias gs='git status'
+alias gd='git diff'
+alias gp='git push'
+alias gc='git commit'
+alias ga='git add'
+alias gr='git rm'
