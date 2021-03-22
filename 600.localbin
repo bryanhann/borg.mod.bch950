@@ -1,4 +1,0 @@
-#!/bin/bash
-#This shebang is for synax only. Do not make executable!
-
-export PATH=${PATH}:${HOME}/.local/bin
