@@ -1,0 +1,13 @@
+bch_vim () {
+    dst=${HOME}/.config/vim
+    url=https://github.com/bryanhann/.config.vim
+    [ -d $dst ] || git clone ${url} ${dst}
+    pushd ${dst}
+    source insitu.d/insitu
+    popd
+    vim $*
+    #export VIMINIT='let $MYVIMRC="$HOME/.config/vim/vimrc" | source $MYVIMRC'
+}
+
+#export VIMINIT='let $MYVIMRC="$HOME/.config/vim/vimrc" | source $MYVIMRC'
+
