@@ -1,6 +1,63 @@
 #!/bin/bash
 #This shebang is for synax only. Do not make executable!
 
-mydts inject $(bch-monty meta) ~/.myinjections/mymonty
-bch-monty install
-bch_monty activate
+islinux () {
+    local name=linux
+    echo ${OSTYPE} | grep ${name} > /dev/null 2> /dev/null
+}
+
+
+__bch_starship__ () {
+    [ ! -e /usr/local/bin/starship ] && {
+        curl -fsSL https://starship.rs/install.sh | bash
+    }
+    case $(basename ${SHELL}). in
+        bash.)
+            echo starship: bash
+            eval "$(starship init bash)"
+            ;;
+        zsh.)
+            echo starship: zsh
+            eval "$(starship init zsh)"
+            ;;
+        *)
+            echo defaulting to monty
+            __monty
+            ;;
+    esac
+}
+
+
+__bch_monty__ () {
+    local activate=1
+    local install=
+    local dst=~/.myinjections/monty.default
+    while [ ! "${1}" = "" ]; do
+        arg=$1
+        shift
+        case ${arg}. in
+            --install.)
+                install=1
+                ;;
+            --no-activate.)
+                activate=
+                ;;
+            --dst.)
+                dst=$1
+                shift
+                ;;
+        esac
+    done
+
+    local SRC=https://github.com/magicmonty/bash-git-prompt
+    local script=${dst}/gitprompt.sh
+    [ ! -e $script ] && install=1
+    [ ${install}. = 1. ] && {
+        rm -rf ${dst}
+        git clone ${SRC} ${dst}
+    }
+    [ ${activate}. = 1. ] && source $script
+}
+
+islinux && __bch_starship__
+islinux || __bch_monty__
