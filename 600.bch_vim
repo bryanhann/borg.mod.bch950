@@ -1,8 +1,9 @@
 bch_vim_activate () {
     dst=${HOME}/.config/vim
     url=https://github.com/bryanhann/.config.vim
-    [ -d $dst ] || git clone ${url} ${dst}
-    [ -d $dst ] || return
+    [ -d ${dst} ] && [ ! -d ${dst}/insitu.d ] && mv ${dst} ${dst}.backup
+    [ -d ${dst} ] || git clone ${url} ${dst}
+    [ -d ${dst} ] || return
     pushd ${dst} > /dev/null
     source insitu.d/insitu
     popd > /dev/null
