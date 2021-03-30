@@ -1,4 +1,4 @@
-bch_vim_activate () {
+bch_vim_install () {
     dst=${HOME}/.config/vim
     url=https://github.com/bryanhann/.config.vim
     [ -d ${dst} ] && [ ! -d ${dst}/insitu.d ] && mv ${dst} ${dst}.backup
@@ -7,6 +7,18 @@ bch_vim_activate () {
     pushd ${dst} > /dev/null
     source insitu.d/insitu
     popd > /dev/null
+}
+
+bch_vim_activate () {
+    dst=${HOME}/.config/vim
+    [ ! -d ${dst}/insitu.d ] && {
+        echo bch_vim npt yet installed.
+        echo Install with [bch_vim_install].
+        return
+    }
+    pushd ${dst} > /dev/null
+    source insitu.d/insitu
+    popd
 }
 
 bch_vim_activate
