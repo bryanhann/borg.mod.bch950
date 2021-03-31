@@ -8,8 +8,12 @@ islinux () {
 
 
 __bch_starship__ () {
+    mkdir -p ~/.local/bin
     [ ! -e /usr/local/bin/starship ] && {
-        curl -fsSL https://starship.rs/install.sh | bash
+        curl -fsSL https://starship.rs/install.sh > ./delete.me
+        chmod +x ./delete.me
+        ./delete.me -y -b ~/.local/bin > /dev/null
+        rm ./delete.me
     }
     case $(basename ${SHELL}). in
         bash.)
