@@ -1,4 +1,12 @@
 #!/bin/sh
+__red () {
+tput setaf 1 
+echo "$*"
+tput sgr0
+}
+#export BCH_900_VIM_CONFIG=${HOME}/.config/vim
+#export BCH_900_VIM_REMOTE=https://github.com/bryanhann/.config.vim
+
 
 bch_vim_install () {
     dst=${HOME}/.config/vim
@@ -14,7 +22,7 @@ bch_vim_install () {
 bch_vim_activate () {
     dst=${HOME}/.config/vim
     [ ! -d ${dst}/insitu.d ] && {
-        bch-900-red "bch_vim not installed. Install with [bch_vim_install]."
+        _i_red "bch_vim not installed. Install with [bch_vim_install]."
         return
     }
     [ ! -d ${dst} ] && {
