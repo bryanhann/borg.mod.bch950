@@ -1,4 +1,4 @@
+export PATH=${PATH}:${PWD}/bin
 for script in $(/bin/ls [0-9]* | sort); do
     _myborg source  $PWD/$script
 done
-

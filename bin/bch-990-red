@@ -1,0 +1,4 @@
+tput setaf 1 
+echo "$*"
+tput sgr0
+
