@@ -1,4 +1,9 @@
-export PATH=${PATH}:${PWD}/bin
+export PATH=${PATH}:${PWD}
+__red () {
+    tput setaf 1 
+    echo "$*"
+    tput sgr0
+}
 cd ./modules
 for script in $(/bin/ls [0-9]* | sort); do
     _myborg source  $PWD/$script

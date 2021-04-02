@@ -1,13 +1,17 @@
 #!/bin/bash
 #This shebang is for synax only. Do not make executable!
 
+bch9_monty_dst ()      { echo ~/.myinjections/monty.default ; }
+bch9_monty_src ()      { echo https://github.com/magicmonty/bash-git-prompt ; }
+bch9_monty_activate () { source $(bch9_monty_dst)/gitprompt.sh ; }
+
 islinux () {
     local name=linux
     echo ${OSTYPE} | grep ${name} > /dev/null 2> /dev/null
 }
 
 
-__bch_starship__ () {
+bch9_prompt_activate_starship () {
     mkdir -p ~/.local/bin
     [ ! -e /usr/local/bin/starship ] && {
         curl -fsSL https://starship.rs/install.sh > ./delete.me
@@ -32,36 +36,14 @@ __bch_starship__ () {
 }
 
 
-__bch_monty__ () {
-    local activate=1
-    local install=
-    local dst=~/.myinjections/monty.default
-    while [ ! "${1}" = "" ]; do
-        arg=$1
-        shift
-        case ${arg}. in
-            --install.)
-                install=1
-                ;;
-            --no-activate.)
-                activate=
-                ;;
-            --dst.)
-                dst=$1
-                shift
-                ;;
-        esac
-    done
-
-    local SRC=https://github.com/magicmonty/bash-git-prompt
-    local script=${dst}/gitprompt.sh
-    [ ! -e $script ] && install=1
-    [ ${install}. = 1. ] && {
-        rm -rf ${dst}
-        git clone ${SRC} ${dst}
+bch9_prompt_activate_monty () {
+    [ $1. = install. ] && rm -rf $(bch9_monty_dst)
+    [ ! -d $(bch9_monty_dst) ] && {
+        echo installing monty
+        git clone $(bch9_monty_src) $(bch9_monty_dst)
     }
-    [ ${activate}. = 1. ] && source $script
+    bch9_monty_activate
 }
 
-islinux && __bch_starship__
-islinux || __bch_monty__
+islinux && bch9_prompt_activate_starship
+islinux || bch9_prompt_activate_monty

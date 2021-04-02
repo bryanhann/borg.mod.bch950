@@ -1,38 +1,28 @@
 #!/bin/sh
-__red () {
-tput setaf 1 
-echo "$*"
-tput sgr0
-}
-#export BCH_900_VIM_CONFIG=${HOME}/.config/vim
-#export BCH_900_VIM_REMOTE=https://github.com/bryanhann/.config.vim
+bch9_vim_dst ()          { echo ${HOME}/.config/vim ; }
+bch9_vim_src ()          { echo https://github.com/bryanhann/.config.vim ; }
+bch9_vim_is_installed () { [ -d $(bch9_vim_dst)/insitu.d ]; }
 
-
-bch_vim_install () {
-    dst=${HOME}/.config/vim
-    url=https://github.com/bryanhann/.config.vim
-    [ -d ${dst} ] && [ ! -d ${dst}/insitu.d ] && mv ${dst} ${dst}.backup
-    [ -d ${dst} ] || git clone ${url} ${dst}
-    [ -d ${dst} ] || return
+bch9_vim_install () {
+    src=$(bch9_vim_src)
+    dst=$(bch9_vim_dst)
+    bak=$(bch9_vim_dst).backup
+    [ $1. = -f. ] && rm -rf ${bak}
+    [ $1. = -f. ] && mv ${dst} ${bak}
+    [ -d ${dst} ] && echo something there. try -f
+    [ -d ${dst} ] && return
+    git clone ${src} ${dst}
     pushd ${dst} > /dev/null
     source insitu.d/insitu
     popd > /dev/null
 }
 
-bch_vim_activate () {
-    dst=${HOME}/.config/vim
-    [ ! -d ${dst}/insitu.d ] && {
-        _i_red "bch_vim not installed. Install with [bch_vim_install]."
-        return
-    }
-    [ ! -d ${dst} ] && {
-        echo "[bch_vim_activate]: NOT FOUND: [$dst]"
-        return 1
-    }
-    pushd ${dst} > /dev/null
-    source insitu.d/insitu
-    popd > /dev/null
-}
+#__bch_vim_activate () {
+#    bch_vim_is_installed || {
+#        __red "bch_vim not installed. Install with [bch_vim_install -f]."
+#        return
+#    }
+#}
 
-bch_vim_activate
+bch9_vim_is_installed || __red "bch9_vim not installed. Install with [bch9_vim_install -f]."
 
