@@ -1,3 +1,5 @@
+#!/bin/sh
+
 bch_vim_install () {
     dst=${HOME}/.config/vim
     url=https://github.com/bryanhann/.config.vim
@@ -12,13 +14,16 @@ bch_vim_install () {
 bch_vim_activate () {
     dst=${HOME}/.config/vim
     [ ! -d ${dst}/insitu.d ] && {
-        echo bch_vim npt yet installed.
-        echo Install with [bch_vim_install].
+        myborg_warn ""bch_vim not installed. Install with [bch_vim_install].
         return
+    }
+    [ ! -d ${dst} ] && {
+        echo "[bch_vim_activate]: NOT FOUND: [$dst]"
+        return 1
     }
     pushd ${dst} > /dev/null
     source insitu.d/insitu
-    popd
+    popd > /dev/null
 }
 
 bch_vim_activate
