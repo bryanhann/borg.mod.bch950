@@ -1,8 +1,11 @@
 export PATH=${PATH}:${PWD}
-__red () {
+__warn () {
     tput setaf 1 
-    echo "$*"
+    tput setab 10 
+    tput blink
+    printf  "$*"
     tput sgr0
+    echo
 }
 cd ./modules
 for script in $(/bin/ls [0-9]* | sort); do
