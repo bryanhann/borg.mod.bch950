@@ -1,4 +1,4 @@
 for script in $(/bin/ls [0-9]* | sort); do
-    _myborg_source  $PWD/$script
+    _myborg source  $PWD/$script
 done
 
