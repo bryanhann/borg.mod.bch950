@@ -1,5 +1,5 @@
 export PATH=${PATH}:${PWD}
-__warn () {
+__bch9_warn () {
     tput setaf 1 
     tput setab 10 
     tput blink

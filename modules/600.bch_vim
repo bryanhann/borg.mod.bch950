@@ -1,7 +1,10 @@
 #!/bin/sh
 bch9_vim_dst ()          { echo ${HOME}/.config/vim ; }
 bch9_vim_src ()          { echo https://github.com/bryanhann/.config.vim ; }
-bch9_vim_is_installed () { [ -d $(bch9_vim_dst)/insitu.d ]; }
+
+bch9_vim_is_installed () { 
+    [ -d $(bch9_vim_dst)/insitu.d ];
+}
 
 bch9_vim_install () {
     src=$(bch9_vim_src)
@@ -17,12 +20,14 @@ bch9_vim_install () {
     popd > /dev/null
 }
 
-#__bch_vim_activate () {
-#    bch_vim_is_installed || {
-#        __red "bch_vim not installed. Install with [bch_vim_install -f]."
-#        return
-#    }
-#}
+bch_vim_activate () {
+    bch9_vim_is_installed || {
+       __bch9_warn "bch9_vim not installed. Install with [bch9_vim_install -f]."
+       return
+    }
+    pushd $(bch9_vim_dst) > /dev/null
+    source insitu.d/insitu
+    popd > /dev/null
+}
 
-bch9_vim_is_installed || __warn "bch9_vim not installed. Install with [bch9_vim_install -f]."
-
+bch_vim_activate
