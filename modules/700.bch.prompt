@@ -5,12 +5,6 @@ bch9_monty_dst ()      { echo ~/.myinjections/monty.default ; }
 bch9_monty_src ()      { echo https://github.com/magicmonty/bash-git-prompt ; }
 bch9_monty_activate () { source $(bch9_monty_dst)/gitprompt.sh ; }
 
-islinux () {
-    local name=linux
-    echo ${OSTYPE} | grep ${name} > /dev/null 2> /dev/null
-}
-
-
 bch9_prompt_activate_starship () {
     mkdir -p ~/.local/bin
     [ ! -e /usr/local/bin/starship ] && {
@@ -45,5 +39,8 @@ bch9_prompt_activate_monty () {
     bch9_monty_activate
 }
 
-islinux && bch9_prompt_activate_starship
-islinux || bch9_prompt_activate_monty
+# We default to monty because it is fast loading. If the user
+# want to use the starship prompt, they can active it by hand.
+
+bch9_prompt_activate_monty
+
