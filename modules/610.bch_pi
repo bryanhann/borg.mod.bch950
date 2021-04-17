@@ -1,0 +1,7 @@
+bch_pi_install () {
+    echo PI INSTALL
+    sudo apt-get update
+    #sudo apt-get upgrade
+    sudo apt-get install vim
+    sudo apt-get install python3
+}
