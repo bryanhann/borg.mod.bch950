@@ -5,11 +5,14 @@ date4dt () { echo $1 | cut -c 1-8; }
 ncat    () { echo ${bold}${1}${normal}; cat ${1}; }
 dump    () { for name in $(/bin/ls $ROOT/*.zjot); do ncat ${name}; done; }
 
+export_ ROOT $BCH_ZJOT_ACC_DIR
+[ "$ROOT" = "" ] && export_ ROOT  ~/dated.bch.acc
+alias prj='cd ~/_prj'
+
 export_ bold    $(tput bold)
 export_ normal  $(tput sgr0)
 export_ ulOn    $(tput smul)
 export_ ulOff   $(tput rmul)
-export_ ROOT    ~/dated.bch.acc
 
 main () {
     export_ dt      $(dt4)

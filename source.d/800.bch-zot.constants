@@ -1,4 +1,4 @@
 #!/bin/bash
 #This shebang is for synax only. Do not make executable!
 
-
+export BCH_ZJOT_ACC_DIR=${HOME}/acc.zjot
