@@ -1,2 +1,0 @@
-borg:deref () { eval "echo \$${1}"; }
-
