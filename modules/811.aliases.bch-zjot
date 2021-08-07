@@ -1,0 +1,7 @@
+#!/bin/bash
+#This shebang is for synax only. Do not make executable!
+
+alias .z='bch-zjot'
+alias .do='bch-zjot .todo'
+alias .begin='bch-zjot .begin'
+alias .end='bch-zjot .end'
