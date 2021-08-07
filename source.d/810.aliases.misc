@@ -1,0 +1,6 @@
+#!/bin/bash
+#This shebang is for synax only. Do not make executable!
+
+alias l='ls -lGF'
+alias lbin='pushd ~/.local/bin'
+alias envl='set | grep ' # environ list

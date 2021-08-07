@@ -1,12 +1,6 @@
 #!/bin/bash
 #This shebang is for synax only. Do not make executable!
 
-alias ls='ls -GF'
-alias l='ls -lGF'
-alias lbin='pushd ~/.local/bin'
-alias envl='set | grep ' # environ list
-alias cfg='cd ~/.config/myborg/modules/0.bch'
-alias prj='cd ~/_prj'
 alias gs='git status'
 alias gd='git diff'
 alias gp='git push'
