@@ -1,0 +1,4 @@
+deref     () { eval "echo \$${1}"; }
+
+# the following will not terminate of there is a cycle.
+deref_all () { [ ! "$1" = "" ] && echo $1 && deref_all $(deref $1) ; }
