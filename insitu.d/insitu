@@ -8,7 +8,7 @@ __bch9_warn () {
     tput sgr0
     echo
 }
-cd ./modules
+cd ./source.d
 for script in $(/bin/ls [0-9]* | sort); do
     _myborg source  $PWD/$script
 done
