@@ -1,11 +1,19 @@
 #!/bin/bash
 export_ () { export $1="$2"; }
-dt4     () { echo $(date "+%Y%m%dT%H%M%S"); }
-date4dt () { echo $1 | cut -c 1-8; }
+dt4     () { echo $(date "+%Y-%m-%d-T-%H:%M:%S"); }
+date4dt () { echo $1 | cut -c 1-4,6-7,9-10; }
 ncat    () { echo ${bold}${1}${normal}; cat ${1}; }
 dump    () { for name in $(/bin/ls $ROOT/*.zjot); do ncat ${name}; done; }
 
-export_ ROOT $BCH_ZJOT_ACC_DIR
+prog=$(basename $0)
+
+[ "$BCH_PH_DROPBOX" = "" ] && {
+    echo ${prog}: "[\$BCH_PH_DROPBOX] is undefined."
+    echo this script does not know where to write the jots.
+    exit
+}
+export_ ROOT  ${BCH_PH_DROPBOX}
+echo export_ ROOT $BCH_ZJOT_ACC_DIR
 [ "$ROOT" = "" ] && export_ ROOT  ~/dated.bch.acc
 alias prj='cd ~/_prj'
 
@@ -17,7 +25,7 @@ export_ ulOff   $(tput rmul)
 main () {
     export_ dt      $(dt4)
     export_ file    ${ROOT}/$(date4dt $dt)T.zjot
-    export_ f0      "${dt}.zjot"
+    export_ f0      "${dt}"
     export_ f1      "${*}"
 
     mkdir -p ${ROOT}
