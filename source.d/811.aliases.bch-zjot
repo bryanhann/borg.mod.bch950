@@ -1,7 +1,8 @@
-#!/bin/bash
-#This shebang is for synax only. Do not make executable!
+#!/do/not/exec/bash
 
-alias .z='bch-zjot'
-alias .do='bch-zjot .todo'
-alias .begin='bch-zjot .begin'
-alias .end='bch-zjot .end'
+alias_ () { key=$1; shift; alias ${key}="$*"; }
+
+alias_ .z       bch-zjot --jot
+alias_ .do      .z .todo
+alias_ .begin   .z .begin
+alias_ .end     .z .end
