@@ -1,0 +1,27 @@
+USAGE:
+    bch-zjot SUBCOMMAND 
+
+SUBCOMMANDS:
+    --jot [ARGS]    Leave a jot
+    --list          List the stash
+    --stash         Echo the path of stash
+    --help, -h      This help
+
+This program is a client of the BCH.PERSONAL.DATA repository.
+It maintains a STASH folder in the repository for temporary
+storage of jots. To do this it must know the path to the
+DROP folder of the repository. This is given by the
+environment variable [$BCH_PH_DROP]. If this is undefined
+them the repository is inactive, and this program will
+fail.
+
+If the [--jot] command is supplied with arguments, these
+will form the first part of the message. Otherwise the
+first part of the message will be the empty string.
+The user is then prompted to enter a continuation of
+that message -- useful since the continuation may 
+include special characters (eg '|', '>') that cannot
+easily be included in the argument list. If the args
+supply all the message, press enter at the prompt
+without entering anything. (I.e. finish the command
+line with two presses of the ENTER key).

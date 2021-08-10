@@ -1,48 +1,50 @@
 #!/bin/bash
+
+[ "$BCH_PH_DROP" = "" ] && cat ${0}.usage
+[ "$BCH_PH_DROP" = "" ] && cat ${0}.undefined
+[ "$BCH_PH_DROP" = "" ] && exit
+
 export_ () { export $1="$2"; }
-dt4     () { echo $(date "+%Y-%m-%d-T-%H:%M:%S"); }
-date4dt () { echo $1 | cut -c 1-4,6-7,9-10; }
-ncat    () { echo ${bold}${1}${normal}; cat ${1}; }
-dump    () { for name in $(/bin/ls $ROOT/*.zjot); do ncat ${name}; done; }
 
-prog=$(basename $0)
-
-[ "$BCH_PH_DROP" = "" ] && {
-    echo ${prog}: "[\$BCH_PH_DROPBOX] is undefined."
-    echo this script does not know where to write the jots.
-    exit
+unknown () {
+    echo $(basename $0): unknown subcommand: [$1]
+    echo try "'-h'"
 }
-export_ ROOT  ${BCH_PH_DROP}
-echo export_ ROOT $BCH_ZJOT_ACC_DIR
-[ "$ROOT" = "" ] && export_ ROOT  ~/dated.bch.acc
-alias prj='cd ~/_prj'
 
-export_ bold    $(tput bold)
-export_ normal  $(tput sgr0)
-export_ ulOn    $(tput smul)
-export_ ulOff   $(tput rmul)
-
-main () {
+jot () {
+    dt4     () { echo $(date "+%Y-%m-%d-T-%H:%M:%S"); }
+    date4dt () { echo $1 | cut -c 1-4,6-7,9-10; }
+    dump () {
+        for name in $(/bin/ls ${STASH}/* | sort); do
+            echo $(tput bold) ${name} $(tput sgr0)
+            cat ${name}
+        done
+    }
     export_ dt      $(dt4)
-    export_ file    ${ROOT}/$(date4dt $dt)T.zjot
+    export_ file    ${STASH}/$(date4dt $dt)T.zjot
     export_ f0      "${dt}"
     export_ f1      "${*}"
-
-    mkdir -p ${ROOT}
     touch $file
     dump
-
-    echo 
+    echo
     read -p "${f0} ${f1} ... " f2
     echo
-
     echo "$f0 $f1 $f2" >> $file
     dump
 }
+
+main () {
+    export_ STASH   ${BCH_PH_DROP}/zjot
+    mkdir -p ${STASH}
+    case .$1 in
+        .--jot   )  shift;  jot $* ;;
+        .--stash )  echo ${STASH} ;;
+        .--list  )  ls ${STASH}  ;;
+        .--help  )  cat ${0}.usage ;;
+        .-h      )  cat ${0}.usage ;;
+        .        )  cat ${0}.usage ;;
+        *        )  unknown $* ;;
+    esac
+}
+
 main $*
-
-
-
-
-
-
