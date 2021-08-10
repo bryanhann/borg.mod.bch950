@@ -7,12 +7,12 @@ dump    () { for name in $(/bin/ls $ROOT/*.zjot); do ncat ${name}; done; }
 
 prog=$(basename $0)
 
-[ "$BCH_PH_DROPBOX" = "" ] && {
+[ "$BCH_PH_DROP" = "" ] && {
     echo ${prog}: "[\$BCH_PH_DROPBOX] is undefined."
     echo this script does not know where to write the jots.
     exit
 }
-export_ ROOT  ${BCH_PH_DROPBOX}
+export_ ROOT  ${BCH_PH_DROP}
 echo export_ ROOT $BCH_ZJOT_ACC_DIR
 [ "$ROOT" = "" ] && export_ ROOT  ~/dated.bch.acc
 alias prj='cd ~/_prj'
