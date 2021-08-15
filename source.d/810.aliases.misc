@@ -6,3 +6,7 @@ alias lbin='pushd ~/.local/bin'
 alias envl='set | grep ' # environ list
 alias myborg='cd $MYBORG'
 alias mods='cd $MYBORG_MODS'
+alias apps='cd ${BCHK_ROOT}/apps'
+alias arf='bchk --arf'
+alias hk='bchk'
+alias misc='cd /Users/bch/.myborg/.mods/900.bch.misc/source.d'
