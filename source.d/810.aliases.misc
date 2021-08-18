@@ -8,5 +8,7 @@ alias myborg='cd $MYBORG'
 alias mods='cd $MYBORG_MODS'
 alias apps='cd ${BCHK_ROOT}/apps'
 alias arf='bchk --arf'
+alias drop='bchk drop'
+alias pref='cd /Users/bch/.myborg/.mods/900.bch.misc/source.d'
 alias hk='bchk'
-alias misc='cd /Users/bch/.myborg/.mods/900.bch.misc/source.d'
+
