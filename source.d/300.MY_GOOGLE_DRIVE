@@ -1,0 +1,4 @@
+export MY_GOOGLE_DRIVE=${HOME}/.MY_GOOGLE_DRIVE
+[ -L ${MY_GOOGLE_DRIVE} ] || {
+    ln -s "${HOME}/Google Drive" ${MY_GOOGLE_DRIVE}
+}
