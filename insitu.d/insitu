@@ -9,6 +9,12 @@ __bch9_warn () {
     tput sgr0
     echo
 }
+
+mkdir -p ~/.local/bin
+echo 777 $PWD
+echo }} ls $PWD
+cp ./lbin/* ~/.local/bin
+
 cd ./source.d
 for script in $(/bin/ls [0-9]* | sort); do
     _myborg source  $PWD/$script
