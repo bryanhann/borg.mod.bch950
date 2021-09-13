@@ -1,0 +1,6 @@
+#!/bin/bash
+#i#arf-doit $0 $*
+
+zip -r $1.zip $1 && mv $1 $1.delete.me
+
+

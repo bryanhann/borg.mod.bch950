@@ -1,0 +1,8 @@
+for path in $(find $1); do
+    [ -d $path ] && checksum="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+    [ -d $path ] && checksum="X-------------------------------"
+    [ -d $path ] && checksum="================================"
+    [ -d $path ] || checksum=$(md5 -q $path)
+    printf "${checksum} "
+    stat -t "%s" $path
+done
