@@ -11,8 +11,6 @@ __bch9_warn () {
 }
 
 mkdir -p ~/.local/bin
-echo 777 $PWD
-echo }} ls $PWD
 cp ./lbin/* ~/.local/bin
 
 cd ./source.d
