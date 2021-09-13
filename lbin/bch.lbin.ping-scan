@@ -1,0 +1,79 @@
+#!/bin/sh
+
+
+main () {
+        SANDBOX_SETUP bchk_foo
+
+        export LOCKS=${SANDBOX}/LOCKS
+        export HITS=${SANDBOX}/HITS
+        export PREFIX=$1
+        mkdir -p ${LOCKS}
+        mkdir -p ${HITS}
+
+        # Run ping jobs in the background.
+        # If a reply comes, write address to HITS
+        # Wneh done, write address to LOCKS.
+        #-------------------------------------------------
+        for ii in $(seq 255); do
+               PING ${PREFIX}.${ii} &
+        done
+
+        # poll LOCKS until the number reaches 255
+        #------------------------------------------------
+        while [ ! $(LOCKCOUNT) = 255 ]; do
+                REPORT "processing: $(LOCKCOUNT)/255"
+        done
+
+        # list all addresses that replied.
+        #---------------------------------------------------
+        echo
+        ls -1 ${HITS} | sort
+}
+
+SANDBOX_SETUP () {
+        export SANDBOX=/tmp/$1_$RANDOM_$RANDOM_$RANDOM
+        mkdir -p $SANDBOX
+        trap SANDBOX_TEARDOWN EXIT
+        SANDBOX_TEARDOWN () {
+                echo cleaning up "[$SANDBOX]">&2
+                [ -d "$SANDBOX" ] && rm -rf ${SANDBOX}
+        }
+}
+
+PING () {
+        PING2 () {
+                local TIMEOUT=6
+                local COUNT=1
+                ping -q -t ${TIMEOUT} -c ${COUNT} ${1} > /dev/null 2> /dev/null
+        }
+        PING2 $1 && touch ${HITS}/${1}
+        touch ${LOCKS}/${1}
+}
+
+LOCKCOUNT () {
+        echo $(( $(ls -1 ${LOCKS} | wc -l ) ))
+}
+
+REPORT () {
+        local B='\b\b\b\b\b\b\b\b\b\b\b'
+        printf "$* ${B}${B}${B}" >&2
+}
+
+
+
+
+usage () {
+        echo "USAGE:"
+        echo "        $(basename $0) 10.0.0"
+        echo "        $(basename $0) 192.168.0"
+        echo ""
+        echo "DESCRIPTION:"
+        echo "        list ip addresses on supplied network that respond to pings."
+        echo ""
+}
+
+
+case .$1 in
+        .|.-h|.--help   ) usage ;;
+        *               ) main $* ;;
+esac
