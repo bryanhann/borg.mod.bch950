@@ -1,5 +1,6 @@
 #!/do/not/exec/sh
-export PATH=${PATH}:${PWD}
+export PATH=${PATH}:$(dirname ${PWD})
+export PATH=${PATH}:$(dirname ${PWD})/bin
 export PATH=${PATH}:${PWD}/bin
 __bch9_warn () {
     tput setaf 1 
@@ -11,9 +12,9 @@ __bch9_warn () {
 }
 
 mkdir -p ~/.local/bin
-cp ./lbin/* ~/.local/bin
+cp ../lbin/* ~/.local/bin
 
-cd ./source.d
+cd ../source.d
 for script in $(/bin/ls [0-9]* | sort); do
     source  $PWD/$script
 done
