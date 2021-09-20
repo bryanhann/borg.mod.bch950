@@ -15,5 +15,5 @@ cp ./lbin/* ~/.local/bin
 
 cd ./source.d
 for script in $(/bin/ls [0-9]* | sort); do
-    _myborg source  $PWD/$script
+    source  $PWD/$script
 done
