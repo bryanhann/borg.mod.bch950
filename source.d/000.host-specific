@@ -1,1 +1,2 @@
-source $PWD/$HOSTNAME
+#!/source/this/sh
+[ -f $PWD/$HOSTNAME ] && source $PWD/$HOSTNAME
