@@ -1,6 +1,6 @@
 #!/bin/sh
 bch9_vim_dst ()          { echo ${HOME}/.config/vim ; }
-bch9_vim_src ()          { echo https://github.com/bryanhann/.config.vim ; }
+bch9_vim_src ()          { echo git@github.com:bryanhann/.config.vim ; }
 
 bch9_vim_is_installed () { 
     [ -d $(bch9_vim_dst)/insitu.d ];
