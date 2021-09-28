@@ -1,2 +1,9 @@
 #!/source/only/sh
 export BCHK_CFG_DROP_BOX=~/Google/drop
+export PATH=${PATH}:/Volumes/PUMPKIN/bin
+[ -d /Volumes/PUMPKIN2 ] && echo yes || {
+    echo
+    echo "        WARNING: Pumpkin is not mounted.              "
+    echo "        run: $ sudo ln -s ~/.PUMPKIN /Volumes/PUMPKIN "
+    echo
+}
