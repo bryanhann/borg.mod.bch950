@@ -22,7 +22,7 @@ bch9_vim_install () {
 
 bch_vim_activate () {
     bch9_vim_is_installed || {
-       __bch9_warn "bch9_vim not installed. Install with [bch9_vim_install -f]."
+       bch.misc.warn "bch9_vim not installed. Install with [bch9_vim_install -f]."
        return
     }
     pushd $(bch9_vim_dst) > /dev/null

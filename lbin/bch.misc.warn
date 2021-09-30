@@ -1,0 +1,7 @@
+#!/bin/sh
+tput setaf 1 
+tput setab 10 
+tput blink
+printf  "$*"
+tput sgr0
+echo
