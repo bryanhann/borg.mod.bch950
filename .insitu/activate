@@ -1,7 +1,4 @@
 #!/do/not/exec/sh
-
-__lbin_default
-
 cd ../source.d
 for script in $(/bin/ls [0-9]* | sort); do
     source  $PWD/$script
