@@ -12,3 +12,4 @@ alias drop='bchk drop'
 alias pref='cd /Users/bch/.myborg/.mods/900.bch.misc/source.d'
 alias hk='bchk'
 
+alias .poetry="/Users/bch/.local/pipx/venvs/poetry/bin/poetry"
