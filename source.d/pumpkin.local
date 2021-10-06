@@ -1,6 +1,14 @@
 #!/source/only/sh
 export BCHK_CFG_DROP_BOX=~/Google/drop
 export PATH=${PATH}:/Volumes/PUMPKIN/bin
+
+[ -d /Volumes/PUMPKIN ] || {
+    echo 
+    echo "Mounting Pumpkin [password may be required]..."
+    echo }}} udo sudo ln -s ~/.PUMPKIN /Volumes/PUMPKIN
+    sudo ln -s ~/.PUMPKIN /Volumes/PUMPKIN
+}
+
 [ -d /Volumes/PUMPKIN ] || {
     echo
     echo "        WARNING: Pumpkin is not mounted.              "
