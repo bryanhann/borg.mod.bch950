@@ -2,7 +2,7 @@
 #This shebang is for synax only. Do not make executable!
 
 alias l='ls -lGF'
-alias lbin='pushd ~/.local/bin'
+#alias lbin='pushd ~/.local/bin'
 alias envl='set | grep ' # environ list
 alias myborg='cd $MYBORG'
 alias mods='cd $MYBORG_MODS'
