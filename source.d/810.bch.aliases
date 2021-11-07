@@ -1,0 +1,31 @@
+#!/do/not/exec/bash
+
+alias_ () { key=$1; shift; alias ${key}="$*"; }
+
+### misc
+alias_  l       'ls -lGF'
+alias_  lbin    'pushd ~/.local/bin'
+alias_  envl    'set | grep ' # environ list
+alias_  myborg  'cd $MYBORG'
+alias-  mods    'cd $MYBORG_MODS'
+alias_  apps    'cd ${BCHK_ROOT}/apps'
+alias_  arf     'bchk --arf'
+alias_  drop    'bchk drop'
+alias_  pref    'cd /Users/bch/.myborg/.mods/900.bch.misc/source.d'
+alias_  hk      'bchk'
+alias_  mb      "pushd ${MYBORG}"
+alias_  .poetry "/Users/bch/.local/pipx/venvs/poetry/bin/poetry"
+
+### bch.zjot
+alias_  .z      bch.zjot new
+alias_  .do     .z .todo
+alias_  .begin  .z .begin
+alias_  .end    .z .end
+
+### git
+alias_  gs  'git status'
+alias_  gd  'git diff'
+alias_  gp  'git push'
+alias_  gc  'git commit'
+alias_  ga  'git add'
+alias_  gr  'git rm'

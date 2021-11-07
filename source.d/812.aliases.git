@@ -1,9 +1,0 @@
-#!/bin/bash
-#This shebang is for synax only. Do not make executable!
-
-alias gs='git status'
-alias gd='git diff'
-alias gp='git push'
-alias gc='git commit'
-alias ga='git add'
-alias gr='git rm'
