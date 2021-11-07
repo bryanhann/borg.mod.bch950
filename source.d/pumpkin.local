@@ -1,3 +1,4 @@
 #!/source/only/sh
 export BCHK_CFG_DROP_BOX=~/Google/drop
-export PATH=${PATH}:${HOME}/.PUMPKIN/bin
+#export PATH=${PATH}:${HOME}/.PUMPKIN/bin
+export BCH_POETRY_HANSEL_MOUNT=/Volumes
