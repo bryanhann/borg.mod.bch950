@@ -7,7 +7,7 @@ alias_  l       'ls -lGF'
 alias_  lbin    'pushd ~/.local/bin'
 alias_  envl    'set | grep ' # environ list
 alias_  myborg  'cd $MYBORG'
-alias-  mods    'cd $MYBORG_MODS'
+alias_  mods    'cd $MYBORG_MODS'
 alias_  apps    'cd ${BCHK_ROOT}/apps'
 alias_  arf     'bchk --arf'
 alias_  drop    'bchk drop'
@@ -29,3 +29,4 @@ alias_  gp  'git push'
 alias_  gc  'git commit'
 alias_  ga  'git add'
 alias_  gr  'git rm'
+
